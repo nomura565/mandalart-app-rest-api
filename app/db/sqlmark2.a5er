@@ -1,0 +1,120 @@
+﻿# A5:ER FORMAT:18
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright © 2007 m.matsubara
+# A5:SQL Mk-2 Version 2.19.0 Copyright © 1997 - 2024 m.matsubara
+#  https://a5m2.mmatsubara.com
+
+[Manager]
+ProjectName=
+Author=
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=Main
+PageInfo="Main",5,"A3Landscape",$FFFFFF
+Domain=sqlite_varchar=TEXT
+DomainInfo="sqlite_varchar","TEXT","",""
+Domain=sqlite_int=INTEGER
+DomainInfo="sqlite_int","INTEGER","",""
+LogicalView=1
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=5
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=6
+PaperSize=A4Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSTypeName=Oracle Database
+GenerateDropTableStatement=1
+DropTableIfExists=0
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+UpperCaseKeyword=0
+ShowTag=1
+ShowCommonAttributes=0
+BugFixEntityWidth=1
+
+[Entity]
+PName=sqlite_sequence
+LName=sqlite_sequence
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=50
+Top=50
+Field="name","name","",,,"","",$FFFFFFFF,""
+Field="seq","seq","",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+Position="MAIN",50,50
+ZOrder=-1
+
+[Entity]
+PName=user_master
+LName=ユーザマスタ
+Comment=
+TableInnerOption=
+TableOption=
+Page=MAIN
+Left=50
+Top=150
+Field="ユーザID","user_id","*sqlite_varchar","NOT NULL",0,"","",$FFFFFFFF,""
+Field="パスワード","password","*sqlite_varchar","NOT NULL",,"","",$FFFFFFFF,""
+Field="ロールID","role_id","*sqlite_int","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20240222164248
+Position="MAIN",50,150,326,134
+ZOrder=1
+
+[Entity]
+PName=role_master
+LName=ロールマスタ
+Comment=
+TableInnerOption=
+TableOption=
+Page=Main
+Left=550
+Top=100
+Field="ロールID","role_id","*sqlite_int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ロール名","role_name","*sqlite_varchar","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20240222164354
+Position="Main",550,100,344,116
+ZOrder=4
+
+[Relation]
+Entity1=role_master
+Entity2=user_master
+RelationType1=2
+RelationType2=3
+Fields1=role_id
+Fields2=role_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,776,9224,565,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=78
+Bar2=922
+Bar3=56
+TermPos1=R
+TermPos2=R
+ZOrder=5
