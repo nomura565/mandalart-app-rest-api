@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 });
 
 // ポートを指定して待ち受ける
-const port = process.argv[2] || 3000;
+const port = process.argv[2] || 9050;
 app.listen(port, () => {
   console.log(`サーバ起動 : http://localhost:${port}/`);
 });

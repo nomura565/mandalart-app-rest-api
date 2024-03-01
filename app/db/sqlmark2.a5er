@@ -1,7 +1,7 @@
 ﻿# A5:ER FORMAT:18
 # A5:ER ENCODING:UTF8
 # A5:ER Mk-1 Copyright © 2007 m.matsubara
-# A5:SQL Mk-2 Version 2.19.0 Copyright © 1997 - 2024 m.matsubara
+# A5:SQL Mk-2 Version 2.19.1 Copyright © 1997 - 2024 m.matsubara
 #  https://a5m2.mmatsubara.com
 
 [Manager]
@@ -71,12 +71,13 @@ Page=MAIN
 Left=50
 Top=150
 Field="ユーザID","user_id","*sqlite_varchar","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ユーザ名","user_name","*sqlite_varchar","NOT NULL",,"","",$FFFFFFFF,""
 Field="パスワード","password","*sqlite_varchar","NOT NULL",,"","",$FFFFFFFF,""
 Field="ロールID","role_id","*sqlite_int","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240222164248
+ModifiedDateTime=20240227134704
 Position="MAIN",50,150,326,134
 ZOrder=1
 
@@ -86,7 +87,7 @@ LName=ロールマスタ
 Comment=
 TableInnerOption=
 TableOption=
-Page=Main
+Page=MAIN
 Left=550
 Top=100
 Field="ロールID","role_id","*sqlite_int","NOT NULL",0,"","",$FFFFFFFF,""
@@ -95,7 +96,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20240222164354
-Position="Main",550,100,344,116
+Position="MAIN",550,100,344,116
 ZOrder=4
 
 [Relation]
