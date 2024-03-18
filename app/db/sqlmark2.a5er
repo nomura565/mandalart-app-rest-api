@@ -119,3 +119,44 @@ Bar3=56
 TermPos1=R
 TermPos2=R
 ZOrder=5
+
+[Entity]
+PName=mandalart
+LName=マンダラート
+Comment=
+TableInnerOption=
+TableOption=
+Page=Main
+Left=600
+Top=350
+Field="ユーザID","user_id","*sqlite_varchar","NOT NULL",0,"","",$FFFFFFFF,""
+Field="年月","yyyymm","*sqlite_varchar","NOT NULL",1,"","",$FFFFFFFF,""
+Field="目標0","target_0","*sqlite_varchar",,,"","",$FFFFFFFF,""
+Field="達成レベル0","achievement_level_0","*sqlite_int","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20240315141203
+Position="Main",600,350,970,547
+ZOrder=6
+
+[Relation]
+Entity1=user_master
+Entity2=mandalart
+RelationType1=2
+RelationType2=3
+Fields1=user_id
+Fields2=user_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,8024,7769,776,R,R,""
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=802
+Bar2=777
+Bar3=78
+TermPos1=R
+TermPos2=R
+ZOrder=7

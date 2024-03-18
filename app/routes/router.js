@@ -14,5 +14,6 @@ router.use((req, res, next) => {
 // API 別にルータを設定する
 
 router.use('/users', require('./users-router'));
+router.use('/mandalart', require('./mandalart-router'));
 
 module.exports = router;
