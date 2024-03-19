@@ -41,8 +41,8 @@ class MandalartModel {
         .then((row) => {
           let mandalart = new MandalartEntity(row.user_id, row.yyyymm);
           for (let i = 0; i < 81; i++) {
-            mandalart[`$target_${i}`] = row[`target_${i}`];
-            mandalart[`$achievement_level_${i}`] = row[`achievement_level_${i}`];
+            mandalart[`target_${i}`] = row[`target_${i}`];
+            mandalart[`achievement_level_${i}`] = row[`achievement_level_${i}`];
           }
           return mandalart;
         });
