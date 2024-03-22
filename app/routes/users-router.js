@@ -17,4 +17,14 @@ router.post('/getUserList', (req, res) => {
   usersController.getUserList(req, res);
 });
 
+// ユーザ取得
+router.post('/getUser', (req, res) => {
+  usersController.getUser(req, res);
+});
+
+// ユーザ作成（一般）
+router.post('/createUser', (req, res) => {
+  usersController.createUser(req, res);
+});
+
 module.exports = router;
