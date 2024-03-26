@@ -51,6 +51,8 @@ class UserModel {
       *
     FROM
       user_master
+    WHERE
+     role_id = 1
     `;
     const params = {
     };

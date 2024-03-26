@@ -12,7 +12,7 @@ router.post('/saveMandalart', (req, res) => {
   mandalartController.saveMandalart(req, res);
 });
 
-// 保存
+// 取得
 router.post('/getMandalart', (req, res) => {
   mandalartController.getMandalart(req, res);
 });

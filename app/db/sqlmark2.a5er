@@ -126,18 +126,20 @@ LName=マンダラート
 Comment=
 TableInnerOption=
 TableOption=
-Page=Main
+Page=MAIN
 Left=600
 Top=350
 Field="ユーザID","user_id","*sqlite_varchar","NOT NULL",0,"","",$FFFFFFFF,""
 Field="年月","yyyymm","*sqlite_varchar","NOT NULL",1,"","",$FFFFFFFF,""
-Field="目標0","target_0","*sqlite_varchar",,,"","",$FFFFFFFF,""
-Field="達成レベル0","achievement_level_0","*sqlite_int","NOT NULL",,"","",$FFFFFFFF,""
+Field="目標0","target_0","*sqlite_varchar",,,"","実際は0～80まで列がある",$FFFFFFFF,""
+Field="達成レベル0","achievement_level_0","*sqlite_int","NOT NULL",,"","実際は0～80まで列がある",$FFFFFFFF,""
+Field="目標80","target_80","*sqlite_varchar",,,"","",$FFFFFFFF,""
+Field="達成レベル80","achievement_level_80","*sqlite_int",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240315141203
-Position="Main",600,350,970,547
+ModifiedDateTime=20240326150051
+Position="MAIN",600,350,970,547
 ZOrder=6
 
 [Relation]
