@@ -21,3 +21,11 @@ $ npm start
 ## DB構造
 
 sqlmark2.a5er参照
+
+テスト用一般ユーザ
+user id:test_user
+password:password
+
+テスト用一般ユーザ
+user id:test_user_admin
+password:password
