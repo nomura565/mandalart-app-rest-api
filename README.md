@@ -17,6 +17,7 @@ $ npm start
 | ユーザ一覧取得                 | POST      | `http://localhost:9050/api/user/getUserList`  |
 | ユーザ取得                     | POST      | `http://localhost:9050/api/user/getUser`  |
 | ユーザ作成（一般）              | POST      | `http://localhost:9050/api/user/createUser`  |
+| チェックリスト取得              | POST      | `http://localhost:9050/api/user/getCheckList`  |
 
 ## DB構造
 

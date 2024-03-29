@@ -53,6 +53,7 @@ getMandalart(req, res) {
     this.logger.logStart(logTarget);
     this.logger.loginfo(logTarget, "req.body.user_id:" + req.body.user_id);
     this.logger.loginfo(logTarget, "req.body.yyyymm:" + req.body.yyyymm);
+    this.logger.loginfo(logTarget, "req.body.achievement_gauge_value:" + req.body.achievement_gauge_value);
 
     const request = req.body;
 

@@ -135,10 +135,11 @@ Field="目標0","target_0","*sqlite_varchar",,,"","実際は0～80まで列が�
 Field="達成レベル0","achievement_level_0","*sqlite_int","NOT NULL",,"","実際は0～80まで列がある",$FFFFFFFF,""
 Field="目標80","target_80","*sqlite_varchar",,,"","",$FFFFFFFF,""
 Field="達成レベル80","achievement_level_80","*sqlite_int",,,"","",$FFFFFFFF,""
+Field="達成率","achievement_gauge_value","@DOUBLE",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240326150051
+ModifiedDateTime=20240328093712
 Position="MAIN",600,350,970,547
 ZOrder=6
 

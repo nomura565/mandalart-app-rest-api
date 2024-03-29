@@ -1,5 +1,6 @@
 const Model = require('./model');
 const UserEntity = require('../entities/user-entity');
+const CheckListEntity = require('../entities/checklist-entity');
 
 /**
  * User Model
@@ -101,7 +102,7 @@ class UserModel {
 * @param password パスワード
 * @return 取得できたら Resolve する
 */
-createUser(user_id, user_name, password) {
+  createUser(user_id, user_name, password) {
     const sql = `
           INSERT INTO user_master (
             user_id,
@@ -125,6 +126,49 @@ createUser(user_id, user_name, password) {
       .then((id) => {
         // 登録したデータを返却する
         //return this.findById(seat_info.seat_id, seat_info.seat_date);
+      });
+  }
+
+  /**
+ * チェックリスト取得
+ * 
+ * @return Entity の配列を Resolve する
+ */
+  getCheckList() {
+    const sql = `
+        SELECT
+          um.user_id
+          ,um.user_name
+          ,m.max_yyyymm
+          , CASE WHEN m2.achievement_gauge_value IS NULL THEN "" 
+	          ELSE CAST(m2.achievement_gauge_value * 100 AS STRING) || "%" END AS achievement_gauge_value
+        FROM user_master um
+        LEFT JOIN 
+        (
+          SELECT
+            user_id
+            ,MAX(yyyymm) as max_yyyymm
+            FROM mandalart
+            GROUP BY user_id
+        ) m
+        ON um.user_id = m.user_id
+        LEFT JOIN mandalart m2
+        ON m.user_id = m2.user_id
+        AND m.max_yyyymm = m2.yyyymm
+        
+        WHERE um.role_id = 1
+      `;
+    const params = {
+    };
+
+    return this.model.findAll(sql, params)
+      .then((rows) => {
+        const users = [];
+
+        for (const row of rows) {
+          users.push(new CheckListEntity(row.user_id, row.user_name, row.max_yyyymm, row.achievement_gauge_value));
+        }
+        return users;
       });
   }
 }

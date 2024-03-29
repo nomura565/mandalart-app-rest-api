@@ -42,11 +42,11 @@ class UsersController {
   }
 
   /**
- * ユーザ一覧取得
- * 
- * @param req リクエスト
- * @param res レスポンス
- */
+   * ユーザ一覧取得
+   * 
+   * @param req リクエスト
+   * @param res レスポンス
+   */
   getUserList(req, res) {
     const logTarget = "getUserList";
     this.logger.logStart(logTarget);
@@ -63,11 +63,11 @@ class UsersController {
   }
 
   /**
-* ユーザ取得
-* 
-* @param req リクエスト
-* @param res レスポンス
-*/
+  * ユーザ取得
+  * 
+  * @param req リクエスト
+  * @param res レスポンス
+  */
   getUser(req, res) {
     const logTarget = "getUser";
     this.logger.logStart(logTarget);
@@ -84,6 +84,7 @@ class UsersController {
         return this.controller.findError(res)(error);
       });
   }
+
   /**
    * ユーザ作成（一般）
    * 
@@ -111,6 +112,27 @@ class UsersController {
         this.logger.logError(logTarget, error);
         this.userModel.model.Rollback();
         return this.controller.editError(res)(error);
+      });
+  }
+
+  /**
+  * チェックリスト取得
+  * 
+  * @param req リクエスト
+  * @param res レスポンス
+  */
+  getCheckList(req, res) {
+    const logTarget = "getCheckList";
+    this.logger.logStart(logTarget);
+
+    this.userModel.getCheckList()
+      .then((result) => {
+        this.logger.logEnd(logTarget);
+        return this.controller.findSuccess(res)(result);
+      })
+      .catch((error) => {
+        this.logger.logError(logTarget, error);
+        return this.controller.findError(res)(error);
       });
   }
 }

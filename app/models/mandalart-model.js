@@ -59,6 +59,7 @@ class MandalartModel {
       INSERT INTO mandalart (
         user_id,
         yyyymm,
+        achievement_gauge_value,
     `;
 
     for (let i = 0; i < 80; i++) {
@@ -74,6 +75,7 @@ class MandalartModel {
       ) VALUES (
           $user_id,
           $yyyymm,
+          $achievement_gauge_value,
     `;
 
     for (let i = 0; i < 80; i++) {
@@ -90,6 +92,7 @@ class MandalartModel {
      ON CONFLICT(user_id, yyyymm) 
      DO UPDATE 
        SET 
+       achievement_gauge_value = $achievement_gauge_value,
     `;
 
     for (let i = 0; i < 80; i++) {
@@ -103,7 +106,8 @@ class MandalartModel {
 
     let params = {
       $user_id: request.user_id,
-      $yyyymm: request.yyyymm
+      $yyyymm: request.yyyymm,
+      $achievement_gauge_value: request.achievement_gauge_value
     };
 
     for (let i = 0; i < 81; i++) {

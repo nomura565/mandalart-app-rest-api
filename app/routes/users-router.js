@@ -27,4 +27,9 @@ router.post('/createUser', (req, res) => {
   usersController.createUser(req, res);
 });
 
+// チェックリスト取得
+router.post('/getCheckList', (req, res) => {
+  usersController.getCheckList(req, res);
+});
+
 module.exports = router;
