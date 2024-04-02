@@ -25,7 +25,7 @@ class Model {
     return new Promise((resolve, reject) => {
       db.all(sql, (error, rows) => {
         if(error) {
-          reject(new ModelError(20, 'Internal Server Error'));
+          reject(new ModelError(20, 'Internal Server Error' + error.message));
         }
         else if(rows === null || rows.length === 0) {
           reject(new ModelError(21, 'Entity Not Found'));

@@ -32,4 +32,9 @@ router.post('/getCheckList', (req, res) => {
   usersController.getCheckList(req, res);
 });
 
+// 達成率リスト取得
+router.post('/getAcheivementList', (req, res) => {
+  usersController.getAcheivementList(req, res);
+});
+
 module.exports = router;

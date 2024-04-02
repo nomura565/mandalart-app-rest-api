@@ -141,7 +141,7 @@ class UserModel {
           ,um.user_name
           ,m.max_yyyymm
           , CASE WHEN m2.achievement_gauge_value IS NULL THEN "" 
-	          ELSE CAST(m2.achievement_gauge_value * 100 AS STRING) || "%" END AS achievement_gauge_value
+	          ELSE CAST(ROUND(m2.achievement_gauge_value * 100, 2) AS STRING) || "%" END AS achievement_gauge_value
         FROM user_master um
         LEFT JOIN 
         (
@@ -163,12 +163,57 @@ class UserModel {
 
     return this.model.findAll(sql, params)
       .then((rows) => {
-        const users = [];
+        const checkLists = [];
 
         for (const row of rows) {
-          users.push(new CheckListEntity(row.user_id, row.user_name, row.max_yyyymm, row.achievement_gauge_value));
+          checkLists.push(new CheckListEntity(row.user_id, row.user_name, row.max_yyyymm, row.achievement_gauge_value));
         }
-        return users;
+        return checkLists;
+      });
+  }
+
+  /**
+ * 達成率リスト取得
+ * 
+ * @param user_id ユーザID
+ * @param yyyy 年
+ * 
+ * @return Entity の配列を Resolve する
+ */
+  getAcheivementList(user_id, yyyy) {
+    const sql = `
+        SELECT
+          user_id
+          ,yyyymm
+          ,CASE WHEN achievement_gauge_value IS NULL THEN "" 
+          ELSE CAST(ROUND(achievement_gauge_value * 100, 2) AS STRING) END AS achievement_gauge_value
+        FROM mandalart
+        WHERE user_id = $user_id
+        AND yyyymm LIKE $yyyy
+      `;
+    const params = {
+      $user_id: user_id,
+      $yyyy: yyyy + "%"
+    };
+
+    return this.model.findSelect(sql, params)
+      .then((rows) => {
+        const acheivementLists = [];
+
+        
+        Array(12).fill(0).map((val, i) => {
+          const yy = (i+1).toString().padStart( 2, '0');
+          let addData = null;
+          for (const row of rows) {
+            const dataYy = row.yyyymm.split('/')[1];
+            if(yy === dataYy){
+              addData = row.achievement_gauge_value;
+            }
+          }
+          acheivementLists.push(addData);
+        })
+        
+        return acheivementLists;
       });
   }
 }
