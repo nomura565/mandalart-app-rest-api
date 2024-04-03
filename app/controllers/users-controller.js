@@ -96,13 +96,15 @@ class UsersController {
     this.logger.logStart(logTarget);
     this.logger.loginfo(logTarget, "req.body.user_id:" + req.body.user_id);
     this.logger.loginfo(logTarget, "req.body.user_name:" + req.body.user_name);
+    this.logger.loginfo(logTarget, "req.body.department_id:" + req.body.department_id);
 
     const user_id = req.body.user_id;
     const user_name = req.body.user_name;
     const password = req.body.password;
+    const department_id = req.body.department_id;
 
     this.userModel.model.BeginTransaction();
-    this.userModel.createUser(user_id, user_name, password)
+    this.userModel.createUser(user_id, user_name, department_id, password)
       .then((result) => {
         this.logger.logEnd(logTarget);
         this.userModel.model.Commit();
@@ -137,7 +139,7 @@ class UsersController {
   }
 
   /**
-  * チェックリスト取得
+  * 達成率リスト取得
   * 
   * @param req リクエスト
   * @param res レスポンス
@@ -152,6 +154,27 @@ class UsersController {
     const yyyy = req.body.yyyy;
 
     this.userModel.getAcheivementList(user_id, yyyy)
+      .then((result) => {
+        this.logger.logEnd(logTarget);
+        return this.controller.findSuccess(res)(result);
+      })
+      .catch((error) => {
+        this.logger.logError(logTarget, error);
+        return this.controller.findError(res)(error);
+      });
+  }
+
+  /**
+  * 部署一覧取得
+  * 
+  * @param req リクエスト
+  * @param res レスポンス
+  */
+  getDepartmentList(req, res) {
+    const logTarget = "getDepartmentList";
+    this.logger.logStart(logTarget);
+
+    this.userModel.getDepartmentList()
       .then((result) => {
         this.logger.logEnd(logTarget);
         return this.controller.findSuccess(res)(result);

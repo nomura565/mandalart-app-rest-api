@@ -1,6 +1,7 @@
 const Model = require('./model');
 const UserEntity = require('../entities/user-entity');
 const CheckListEntity = require('../entities/checklist-entity');
+const DepartmentEntity = require('../entities/department-entity');
 
 /**
  * User Model
@@ -55,15 +56,13 @@ class UserModel {
     WHERE
      role_id = 1
     `;
-    const params = {
-    };
 
-    return this.model.findAll(sql, params)
+    return this.model.findAll(sql)
       .then((rows) => {
         const users = [];
 
         for (const row of rows) {
-          users.push(new UserEntity(row.user_id, row.user_name, row.role_id));
+          users.push(new UserEntity(row.user_id, row.user_name, row.role_id, row.department_id));
         }
         return users;
       });
@@ -99,27 +98,31 @@ class UserModel {
 * 
 * @param user_id ユーザID
 * @param user_name ユーザ名
+* @param department_id 部署ID
 * @param password パスワード
 * @return 取得できたら Resolve する
 */
-  createUser(user_id, user_name, password) {
+  createUser(user_id, user_name, department_id, password) {
     const sql = `
           INSERT INTO user_master (
             user_id,
             user_name,
             password,
-            role_id
+            role_id,
+            department_id
           ) VALUES (
             $user_id,
             $user_name,
             $password,
-            1
+            1,
+            $department_id
           )
           `;
     const params = {
       $user_id: user_id,
       $user_name: user_name,
-      $password: password
+      $password: password,
+      $department_id: department_id
     };
 
     return this.model.run(sql, params)
@@ -140,6 +143,7 @@ class UserModel {
           um.user_id
           ,um.user_name
           ,m.max_yyyymm
+          ,um.department_id
           , CASE WHEN m2.achievement_gauge_value IS NULL THEN "" 
 	          ELSE CAST(ROUND(m2.achievement_gauge_value * 100, 2) AS STRING) || "%" END AS achievement_gauge_value
         FROM user_master um
@@ -166,7 +170,7 @@ class UserModel {
         const checkLists = [];
 
         for (const row of rows) {
-          checkLists.push(new CheckListEntity(row.user_id, row.user_name, row.max_yyyymm, row.achievement_gauge_value));
+          checkLists.push(new CheckListEntity(row.user_id, row.user_name, row.max_yyyymm, row.department_id, row.achievement_gauge_value));
         }
         return checkLists;
       });
@@ -216,6 +220,32 @@ class UserModel {
         return acheivementLists;
       });
   }
+
+ /**
+   * 部署一覧取得
+   * 
+   * @return Entity の配列を Resolve する
+   */
+ getDepartmentList() {
+  const sql = `
+  SELECT
+    *
+  FROM
+    department_master
+  WHERE department_id <> 0
+  ORDER BY department_id
+  `;
+
+  return this.model.findAll(sql)
+    .then((rows) => {
+      const departments = [];
+
+      for (const row of rows) {
+        departments.push(new DepartmentEntity(row.department_id, row.department_name));
+      }
+      return departments;
+    });
+}
 }
 
 

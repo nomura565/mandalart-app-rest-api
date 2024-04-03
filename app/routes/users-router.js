@@ -37,4 +37,9 @@ router.post('/getAcheivementList', (req, res) => {
   usersController.getAcheivementList(req, res);
 });
 
+// 部署一覧取得
+router.post('/getDepartmentList', (req, res) => {
+  usersController.getDepartmentList(req, res);
+});
+
 module.exports = router;

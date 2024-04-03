@@ -74,10 +74,11 @@ Field="ユーザID","user_id","*sqlite_varchar","NOT NULL",0,"","",$FFFFFFFF,""
 Field="ユーザ名","user_name","*sqlite_varchar","NOT NULL",,"","",$FFFFFFFF,""
 Field="パスワード","password","*sqlite_varchar","NOT NULL",,"","",$FFFFFFFF,""
 Field="ロールID","role_id","*sqlite_int","NOT NULL",,"","",$FFFFFFFF,""
+Field="部署ID","department_id","*sqlite_int","NOT NULL",,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240227134704
+ModifiedDateTime=20240402154454
 Position="MAIN",50,150,326,134
 ZOrder=1
 
@@ -140,7 +141,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20240328093712
-Position="MAIN",600,350,970,547
+Position="MAIN",600,350,617,265
 ZOrder=6
 
 [Relation]
@@ -163,3 +164,42 @@ Bar3=78
 TermPos1=R
 TermPos2=R
 ZOrder=7
+
+[Entity]
+PName=department_master
+LName=部署マスタ
+Comment=
+TableInnerOption=
+TableOption=
+Page=Main
+Left=100
+Top=500
+Field="部署ID","department_id","*sqlite_int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="部署名","department_name","*sqlite_varchar","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20240402154427
+Position="Main",100,500,400,122
+ZOrder=8
+
+[Relation]
+Entity1=department_master
+Entity2=user_master
+RelationType1=2
+RelationType2=3
+Fields1=department_id
+Fields2=department_id
+Cardinarity1=
+Cardinarity2=
+Position="MAIN",0,524,9476,738,R,R,""
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=52
+Bar2=948
+Bar3=74
+TermPos1=R
+TermPos2=R
+ZOrder=9
