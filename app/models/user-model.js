@@ -204,30 +204,30 @@ class UserModel {
       .then((rows) => {
         const acheivementLists = [];
 
-        
+
         Array(12).fill(0).map((val, i) => {
-          const yy = (i+1).toString().padStart( 2, '0');
+          const yy = (i + 1).toString().padStart(2, '0');
           let addData = null;
           for (const row of rows) {
             const dataYy = row.yyyymm.split('/')[1];
-            if(yy === dataYy){
+            if (yy === dataYy) {
               addData = row.achievement_gauge_value;
             }
           }
           acheivementLists.push(addData);
         })
-        
+
         return acheivementLists;
       });
   }
 
- /**
-   * 部署一覧取得
-   * 
-   * @return Entity の配列を Resolve する
-   */
- getDepartmentList() {
-  const sql = `
+  /**
+    * 部署一覧取得
+    * 
+    * @return Entity の配列を Resolve する
+    */
+  getDepartmentList() {
+    const sql = `
   SELECT
     *
   FROM
@@ -236,16 +236,16 @@ class UserModel {
   ORDER BY department_id
   `;
 
-  return this.model.findAll(sql)
-    .then((rows) => {
-      const departments = [];
+    return this.model.findAll(sql)
+      .then((rows) => {
+        const departments = [];
 
-      for (const row of rows) {
-        departments.push(new DepartmentEntity(row.department_id, row.department_name));
-      }
-      return departments;
-    });
-}
+        for (const row of rows) {
+          departments.push(new DepartmentEntity(row.department_id, row.department_name));
+        }
+        return departments;
+      });
+  }
 }
 
 

@@ -22,16 +22,16 @@ class Logger {
   }
 
   logEnd(target) {
-  const logger = Log4js.getLogger();
-  logger.info(target + " end");
-}
+    const logger = Log4js.getLogger();
+    logger.info(target + " end");
+  }
 
   logError(target, error) {
     const logger = Log4js.getLogger();
-    if(error.constructor.name == MODEL_ERROR_CLASS){
+    if (error.constructor.name == MODEL_ERROR_CLASS) {
       logger.error(target + " errorCode:" + error.errorCode);
       logger.error(target + " errorMessage:" + error.errorMessage);
-    }else{
+    } else {
       logger.error(target + " error:" + error.message);
     }
   }

@@ -12,13 +12,13 @@ class MandalartModel {
     this.model = new Model();
   }
 
-    /**
-   * 1件取得(ユーザIDと年月 年月を省略すると一番年月が若いもの)
-   * 
-   * @return Entity の配列を Resolve する
-   */
-    getMandalart(user_id, yyyymm) {
-      let sql = `
+  /**
+ * 1件取得(ユーザIDと年月 年月を省略すると一番年月が若いもの)
+ * 
+ * @return Entity の配列を Resolve する
+ */
+  getMandalart(user_id, yyyymm) {
+    let sql = `
       SELECT
         *
       FROM
@@ -26,27 +26,27 @@ class MandalartModel {
       WHERE
         user_id = $user_id`;
 
-      let params = {
-        $user_id: user_id
-      };
+    let params = {
+      $user_id: user_id
+    };
 
-      if(yyyymm){
-        sql = sql + ` AND yyyymm = $yyyymm `;
-        params[`$yyyymm`] = yyyymm;
-      } else {
-        sql = sql + ` ORDER BY yyyymm DESC LIMIT 1 `;
-      }
-      
-      return this.model.findOne(sql, params)
-        .then((row) => {
-          let mandalart = new MandalartEntity(row.user_id, row.yyyymm);
-          for (let i = 0; i < 81; i++) {
-            mandalart[`target_${i}`] = row[`target_${i}`];
-            mandalart[`achievement_level_${i}`] = row[`achievement_level_${i}`];
-          }
-          return mandalart;
-        });
+    if (yyyymm) {
+      sql = sql + ` AND yyyymm = $yyyymm `;
+      params[`$yyyymm`] = yyyymm;
+    } else {
+      sql = sql + ` ORDER BY yyyymm DESC LIMIT 1 `;
     }
+
+    return this.model.findOne(sql, params)
+      .then((row) => {
+        let mandalart = new MandalartEntity(row.user_id, row.yyyymm);
+        for (let i = 0; i < 81; i++) {
+          mandalart[`target_${i}`] = row[`target_${i}`];
+          mandalart[`achievement_level_${i}`] = row[`achievement_level_${i}`];
+        }
+        return mandalart;
+      });
+  }
 
   /**
    * 保存

@@ -23,7 +23,7 @@ class MandalartController {
 * @param req リクエスト
 * @param res レスポンス
 */
-getMandalart(req, res) {
+  getMandalart(req, res) {
     const logTarget = "getMandalart";
     this.logger.logStart(logTarget);
     this.logger.loginfo(logTarget, "req.body.user_id:" + req.body.user_id);
@@ -31,7 +31,7 @@ getMandalart(req, res) {
 
     const user_id = req.body.user_id;
     const yyyymm = req.body.yyyymm;
-    
+
     this.mandalartModel.getMandalart(user_id, yyyymm)
       .then((result) => {
         this.logger.logEnd(logTarget);
