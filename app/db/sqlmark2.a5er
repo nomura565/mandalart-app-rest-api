@@ -137,10 +137,11 @@ Field="達成レベル0","achievement_level_0","*sqlite_int","NOT NULL",,"","実
 Field="目標80","target_80","*sqlite_varchar",,,"","",$FFFFFFFF,""
 Field="達成レベル80","achievement_level_80","*sqlite_int",,,"","",$FFFFFFFF,""
 Field="達成率","achievement_gauge_value","@DOUBLE",,,"","",$FFFFFFFF,""
+Field="更新日","update_date","*sqlite_varchar",,,"","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20240328093712
+ModifiedDateTime=20240618131604
 Position="MAIN",600,350,617,265
 ZOrder=6
 
@@ -171,7 +172,7 @@ LName=部署マスタ
 Comment=
 TableInnerOption=
 TableOption=
-Page=Main
+Page=MAIN
 Left=100
 Top=500
 Field="部署ID","department_id","*sqlite_int","NOT NULL",0,"","",$FFFFFFFF,""
@@ -180,7 +181,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20240402154427
-Position="Main",100,500,400,122
+Position="MAIN",100,500,400,122
 ZOrder=8
 
 [Relation]

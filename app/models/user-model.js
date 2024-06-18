@@ -50,11 +50,15 @@ class UserModel {
   getUserList() {
     const sql = `
     SELECT
-      *
+      u.*,
+	  d.department_name
     FROM
-      user_master
-    WHERE
-     role_id = 1
+      user_master u
+    LEFT JOIN department_master d
+    ON u.department_id = d.department_id
+      WHERE
+      role_id = 1
+    ORDER BY u.department_id
     `;
 
     return this.model.findAll(sql)
@@ -62,7 +66,7 @@ class UserModel {
         const users = [];
 
         for (const row of rows) {
-          users.push(new UserEntity(row.user_id, row.user_name, row.role_id, row.department_id));
+          users.push(new UserEntity(row.user_id, row.user_name, row.role_id, row.department_id, row.department_name));
         }
         return users;
       });
@@ -143,7 +147,9 @@ class UserModel {
           um.user_id
           ,um.user_name
           ,m.max_yyyymm
+          ,m2.update_date
           ,um.department_id
+          ,dm.department_name
           , CASE WHEN m2.achievement_gauge_value IS NULL THEN "" 
 	          ELSE CAST(ROUND(m2.achievement_gauge_value * 100, 2) AS STRING) || "%" END AS achievement_gauge_value
         FROM user_master um
@@ -159,8 +165,11 @@ class UserModel {
         LEFT JOIN mandalart m2
         ON m.user_id = m2.user_id
         AND m.max_yyyymm = m2.yyyymm
+        LEFT JOIN department_master dm
+        ON um.department_id = dm.department_id
         
         WHERE um.role_id = 1
+        ORDER BY dm.department_id
       `;
     const params = {
     };
@@ -170,7 +179,7 @@ class UserModel {
         const checkLists = [];
 
         for (const row of rows) {
-          checkLists.push(new CheckListEntity(row.user_id, row.user_name, row.max_yyyymm, row.department_id, row.achievement_gauge_value));
+          checkLists.push(new CheckListEntity(row.user_id, row.user_name, row.max_yyyymm, row.update_date, row.department_id, row.department_name, row.achievement_gauge_value));
         }
         return checkLists;
       });

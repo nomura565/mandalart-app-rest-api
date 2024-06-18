@@ -59,6 +59,7 @@ class MandalartModel {
       INSERT INTO mandalart (
         user_id,
         yyyymm,
+        update_date,
         achievement_gauge_value,
     `;
 
@@ -75,6 +76,7 @@ class MandalartModel {
       ) VALUES (
           $user_id,
           $yyyymm,
+          strftime('%Y/%m/%d %H:%M:%S', CURRENT_TIMESTAMP, 'localtime'),
           $achievement_gauge_value,
     `;
 
